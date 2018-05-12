@@ -22,18 +22,37 @@
             }
         ]
     },
+    "lint-staged": {
+      "*.js": [
+        "prettier --write",
+        "git add"
+      ],
+      "*.ts": [
+        "prettier-eslint --parser typescript --write",
+        "tslint --fix",
+        "git add"
+      ],
+      "*.md": [
+        "prettier --parser markdown --write",
+        "git add"
+      ]
+    },
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
+        "precommit": "lint-staged",
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "tslint": "^5.8.0",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "husky": "^0.14.3",
+        "lint-staged": "^7.1.0",
+        "prettier": "^1.12.1",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6"
     }
 }
